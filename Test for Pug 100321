@@ -1,0 +1,15 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © thedCo
+
+//@version=4
+strategy("Test for Pug")
+//set trading size, p/l targets and periodicity of sma
+size = 10
+sma_period = 20
+//open trade long if close above 20-period sma based on bar highs, open trade short if close below 20-period sma based on bar lows
+if close > sma(high, sma_period)
+    strategy.entry("buy", strategy.long, size)
+    strategy.exit("close long", loss=size, profit=size)
+else if close < sma(low, sma_period)
+    strategy.entry("sell", strategy.short, size)
+    strategy.exit("close short", loss=size, profit=size)
